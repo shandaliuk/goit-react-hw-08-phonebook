@@ -4,6 +4,7 @@ import { Component } from 'react';
 export class App extends Component {
   state = {
     contacts: [],
+    filter: '',
     name: '',
     number: '',
   };
@@ -31,6 +32,12 @@ export class App extends Component {
   };
 
   render() {
+    const normalizedFilter = this.state.filter.toLowerCase();
+
+    const filteredContacts = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+
     return (
       <>
         <h2>Phonebook</h2>
@@ -62,9 +69,16 @@ export class App extends Component {
           <button type="submit">Add contact</button>
         </form>
         <h2>Contacts</h2>
+        <h3>Find contacts by name</h3>
+        <input
+          type="text"
+          name="filter"
+          value={this.state.filter}
+          onChange={this.handleChange}
+        />
         <ul>
-          {this.state.contacts !== [] &&
-            this.state.contacts.map(contact => {
+          {filteredContacts !== [] &&
+            filteredContacts.map(contact => {
               return (
                 <li key={contact.id}>
                   {contact.name}: {contact.number}
