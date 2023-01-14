@@ -17,10 +17,12 @@ export const App = () => {
     }
   }, []);
 
-  useEffect(
-    () => localStorage.setItem(LS_KEY, JSON.stringify(contacts)),
-    [contacts]
-  );
+  useEffect(() => {
+    if (contacts.length === 0) {
+      return;
+    }
+    localStorage.setItem(LS_KEY, JSON.stringify(contacts));
+  }, [contacts]);
 
   const checkExclusiveness = name =>
     contacts.find(contact => contact.name === name);
@@ -39,9 +41,7 @@ export const App = () => {
   const onFilterChange = event => setFilter(event.target.value);
 
   const onDeleteClick = id => {
-    setContacts(prevState =>
-      prevState.contacts.filter(contact => contact.id !== id)
-    );
+    setContacts(prevState => prevState.filter(contact => contact.id !== id));
   };
 
   const normalizedFilter = filter.toLowerCase();
