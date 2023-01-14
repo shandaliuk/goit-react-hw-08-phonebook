@@ -31,6 +31,7 @@ export const App = () => {
 
   const handleFormSubmit = contact => {
     const isExisting = checkExclusiveness(contact.name);
+
     if (isExisting) {
       alert(`${contact.name} is already in contacts.`);
       return;
