@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
@@ -9,6 +9,7 @@ const LS_KEY = 'contacts';
 export const App = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+  const isFirstExecution = useRef(true);
 
   useEffect(() => {
     const localContacts = localStorage.getItem(LS_KEY);
@@ -18,7 +19,8 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    if (contacts.length === 0) {
+    if (isFirstExecution.current) {
+      isFirstExecution.current = false;
       return;
     }
     localStorage.setItem(LS_KEY, JSON.stringify(contacts));
@@ -40,9 +42,8 @@ export const App = () => {
 
   const onFilterChange = event => setFilter(event.target.value);
 
-  const onDeleteClick = id => {
+  const onDeleteClick = id =>
     setContacts(prevState => prevState.filter(contact => contact.id !== id));
-  };
 
   const normalizedFilter = filter.toLowerCase();
 
