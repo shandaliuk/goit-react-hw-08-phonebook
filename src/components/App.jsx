@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
@@ -7,22 +7,13 @@ import { Heading } from './App.styled';
 const LS_KEY = 'contacts';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
-  const isFirstExecution = useRef(true);
-
-  useEffect(() => {
+  const [contacts, setContacts] = useState(() => {
     const localContacts = localStorage.getItem(LS_KEY);
-    if (localContacts) {
-      setContacts(JSON.parse(localContacts));
-    }
-  }, []);
+    return localContacts ? JSON.parse(localContacts) : [];
+  });
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    if (isFirstExecution.current) {
-      isFirstExecution.current = false;
-      return;
-    }
     localStorage.setItem(LS_KEY, JSON.stringify(contacts));
   }, [contacts]);
 
