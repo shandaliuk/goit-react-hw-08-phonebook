@@ -1,21 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getContacts, addContact, deleteContact } from 'redux/contactsSlice';
+import { setFilter, getFilter } from 'redux/filterSlice';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { Heading } from './App.styled';
 
-const LS_KEY = 'contacts';
-
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    const localContacts = localStorage.getItem(LS_KEY);
-    return localContacts ? JSON.parse(localContacts) : [];
-  });
-  const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    localStorage.setItem(LS_KEY, JSON.stringify(contacts));
-  }, [contacts]);
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
 
   const checkExclusiveness = name =>
     contacts.find(contact => contact.name === name);
@@ -27,15 +21,12 @@ export const App = () => {
       alert(`${contact.name} is already in contacts.`);
       return;
     }
-    setContacts(prevState => {
-      return [...prevState, contact];
-    });
+    dispatch(addContact(contact));
   };
 
-  const onFilterChange = event => setFilter(event.target.value);
+  const onDeleteClick = id => dispatch(deleteContact(id));
 
-  const onDeleteClick = id =>
-    setContacts(prevState => prevState.filter(contact => contact.id !== id));
+  const onFilterChange = event => dispatch(setFilter(event.target.value));
 
   const normalizedFilter = filter.toLowerCase();
 
