@@ -1,32 +1,32 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, deleteContact } from 'redux/contactsSlice';
-import { getFilter } from 'redux/filterSlice';
+import { selectContacts, selectFilteredContacts } from 'redux/selectors';
+import { deleteContact } from 'redux/operations';
 import { Item, Number, Button } from './ContactList.styled';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const { isLoading, error } = useSelector(selectContacts);
+  const filteredContacts = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
 
-  const normalizedFilter = filter.toLowerCase();
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
-
   const onDeleteClick = id => dispatch(deleteContact(id));
+
   return (
-    <ul>
-      {filteredContacts.map(contact => {
-        const { id, name, number } = contact;
-        return (
-          <Item key={id}>
-            {name}: <Number>{number}</Number>
-            <Button type="button" onClick={() => onDeleteClick(id)}>
-              Delete
-            </Button>
-          </Item>
-        );
-      })}
-    </ul>
+    <>
+      {isLoading && !error && <Item>Loading...</Item>}
+      <ul>
+        {filteredContacts.map(contact => {
+          const { id, name, phone } = contact;
+          return (
+            <Item key={id}>
+              {name}: <Number>{phone}</Number>
+              <Button type="button" onClick={() => onDeleteClick(id)}>
+                Delete
+              </Button>
+            </Item>
+          );
+        })}
+      </ul>
+      {error && !isLoading && <Item>Oops, something went wrong :(</Item>}
+    </>
   );
 };
