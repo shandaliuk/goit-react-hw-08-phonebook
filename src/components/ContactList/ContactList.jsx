@@ -16,10 +16,10 @@ export const ContactList = () => {
       {isLoading && !error && <Item>Loading...</Item>}
       <ul>
         {filteredContacts.map(contact => {
-          const { id, name, phone } = contact;
+          const { id, name, number } = contact;
           return (
             <Item key={id}>
-              {name}: <Number>{phone}</Number>
+              {name}: <Number>{number}</Number>
               <Button type="button" onClick={() => onDeleteClick(id)}>
                 Delete
               </Button>
