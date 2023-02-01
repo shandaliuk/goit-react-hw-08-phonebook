@@ -9,6 +9,7 @@ import { Home } from 'pages/Home/Home';
 import { Contacts } from 'pages/Contacts/Contacts';
 import { Login } from 'pages/Login/Login';
 import { Register } from 'pages/Register/Register';
+import { Error } from 'pages/Error/Error';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -18,27 +19,28 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <h2>Refreshing</h2>
-  ) : (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route
-        path="/contacts"
-        element={<PrivateRoute component={<Contacts />} />}
-      />
-      <Route
-        path="/login"
-        element={
-          <RestrictedRoute component={<Login />} redirectTo="/contacts" />
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <RestrictedRoute component={<Register />} redirectTo="/contacts" />
-        }
-      />
-    </Routes>
+  return (
+    !isRefreshing && (
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/contacts"
+          element={<PrivateRoute component={<Contacts />} />}
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute component={<Login />} redirectTo="/contacts" />
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute component={<Register />} redirectTo="/contacts" />
+          }
+        />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    )
   );
 };

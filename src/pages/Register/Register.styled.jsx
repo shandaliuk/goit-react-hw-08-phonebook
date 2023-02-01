@@ -45,6 +45,21 @@ export const Input = styled.input`
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 `;
 
+export const PasswordInput = styled.input`
+  display: block;
+  width: 300px;
+  padding: 10px 15px;
+  font-family: auto;
+  font-size: 25px;
+  color: #3c2a21;
+  background-color: #d5cea3;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+`;
+
 export const Label = styled.label`
   display: block;
   text-align: center;

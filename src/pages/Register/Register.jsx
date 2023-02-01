@@ -6,6 +6,7 @@ import {
   Form,
   SubmitButton,
   Input,
+  PasswordInput,
   Label,
   Title,
   BackLink,
@@ -58,14 +59,14 @@ export const Register = () => {
         </Label>
         <Label>
           Password
-          <Input
+          <PasswordInput
             type="password"
             name="password"
             value={password}
             onChange={handleChange}
           />
         </Label>
-        <SubmitButton type="submit">Login</SubmitButton>
+        <SubmitButton type="submit">Register</SubmitButton>
       </Form>
       <BackLink to="/">
         <IoMdArrowRoundBack />

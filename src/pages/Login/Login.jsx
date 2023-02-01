@@ -6,6 +6,7 @@ import { BackLink } from 'pages/Register/Register.styled';
 import {
   Form,
   Input,
+  PasswordInput,
   Label,
   SubmitButton,
   Title,
@@ -48,7 +49,7 @@ export const Login = () => {
         </Label>
         <Label>
           Password
-          <Input
+          <PasswordInput
             type="password"
             name="password"
             value={password}
