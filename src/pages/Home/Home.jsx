@@ -5,7 +5,7 @@ import { selectUser, selectIsLoggedIn } from 'redux/auth/selectors';
 import { Heading, UserLink, Text } from './Home.styled';
 import { LogOutButton } from './Home.styled';
 
-export const Home = () => {
+const Home = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
@@ -37,3 +37,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default Home;

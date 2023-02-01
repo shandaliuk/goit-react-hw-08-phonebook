@@ -6,7 +6,7 @@ import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 
-export const Contacts = () => {
+const Contacts = () => {
   const isLogged = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
 
@@ -21,3 +21,5 @@ export const Contacts = () => {
     </>
   );
 };
+
+export default Contacts;

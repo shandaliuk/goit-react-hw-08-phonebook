@@ -2,7 +2,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Heading } from 'pages/Home/Home.styled';
 import { BackLink } from 'pages/Register/Register.styled';
 
-export const Error = () => {
+const Error = () => {
   return (
     <>
       <Heading>Page not found!</Heading>
@@ -13,3 +13,5 @@ export const Error = () => {
     </>
   );
 };
+
+export default Error;

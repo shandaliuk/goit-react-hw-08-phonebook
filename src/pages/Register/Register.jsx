@@ -12,7 +12,7 @@ import {
   BackLink,
 } from './Register.styled';
 
-export const Register = () => {
+const Register = () => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
@@ -75,3 +75,5 @@ export const Register = () => {
     </>
   );
 };
+
+export default Register;

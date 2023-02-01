@@ -12,7 +12,7 @@ import {
   Title,
 } from 'pages/Register/Register.styled';
 
-export const Login = () => {
+const Login = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
@@ -65,3 +65,5 @@ export const Login = () => {
     </>
   );
 };
+
+export default Login;
