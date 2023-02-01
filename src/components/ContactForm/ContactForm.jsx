@@ -16,8 +16,10 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (items.length === 0) {
+      dispatch(fetchContacts());
+    }
+  }, [dispatch, items.length]);
 
   const checkExclusiveness = contactName =>
     items.find(contact => contact.name === contactName);
